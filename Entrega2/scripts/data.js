@@ -11,9 +11,13 @@ let div = document.querySelector('.products');
 let cart = document.querySelector('.showCart');
 let cartDiv = document.querySelector('.cart');
 let list = document.querySelector('.listaProd');
-let anhadidos = [];
+let vacio = document.querySelector('.empty');
+let purchase = document.querySelector('.purchase');
+let total = document.querySelector('.tot');
 
 cart.addEventListener('click',showCart);
+vacio.addEventListener('click',eliminar);
+purchase.addEventListener('click',comprar);
 
 products(productos);
 
@@ -25,9 +29,10 @@ function products(productos){
 			+ '<h3>' + element.nombre +'</h3>'
 			+ '<p class="desc">' + element.descripcion +'</p>'
 			+ '<p class="precio">Precio: ' + element.precio +'€</p>'
-			+ '<button onclick="addToCart('+ element.id +')">Agregar al carrito</button>'
+			+ '<button onclick="addToCart('+element.id+')">Agregar al carrito</button>'
 			+ '</div>';
 			+ '</div>';
+			
 	}
 }
 
@@ -40,30 +45,99 @@ function showCart(){
 }
 
 function addToCart(id){
-	let anhadido = productos[id - 1];
+	
+	let anhadido = productos[id -1];
 	let display = getComputedStyle(list).display;
-
+	let val = false;
 	if(display == 'none'){
 		list.style.display = 'block';
 	}
+	for (const element of list.childNodes) {
+		if(parseInt(element.className) == id){
+			val = true;
+		}
+	}
 
-	if(anhadidos.includes(id)){
-		console.log('esta');
+	if(val == true){
+		sum(anhadido);
 	}else{
-		anhadidos.push(id);
 		if(anhadido.stock > 0){
-			anhadido.stock = anhadido.stock - 1; 
-			list.innerHTML += '<li>'
+			productos[id - 1].stock = productos[id -1].stock - 1;
+			list.innerHTML += '<li class="'+ anhadido.id +'">'
 				+ anhadido.nombre 
 				+ ' - €' + anhadido.precio 
-				+ ' x <a>1</a>'
-				+ '<button>Eliminar</button>'
-				+ '<button>+</button>'
-				+ '<button>-</button>'
+				+ ' x <a class="'+anhadido.nombre+'">1</a>'
+				+ '<button class="'+anhadido.id+'" onclick="eliminarLinea(event)">Eliminar</button>'
+				+ '<button class="'+anhadido.id+'" onclick="sum(event)">+</button>'
+				+ '<button class="'+anhadido.id+'" onclick="res(event)">-</button>'
 				+ '</li>';
-	
+
+			updatePrice(anhadido.precio);
+
 		}else{
 			alert('Producto agotado');
 		}
 	}
+}
+
+function sum(clase){
+	if(typeof clase != 'object'){
+		clase = productos[clase.target.classList[0] - 1]
+	}
+	if(clase.stock > 0){
+		let aux = document.querySelector('.'+clase.nombre);
+		aux.innerHTML = parseInt(aux.innerHTML) + 1;
+		productos[clase.id - 1].stock = productos[clase.id -1].stock - 1;
+		updatePrice(clase.precio);
+	}else{
+		alert('Producto agotado');
+	}
+}
+
+function res(clase){
+	clase = productos[clase.target.classList[0] - 1]
+	aux = document.querySelector('.'+clase.nombre);
+	aux.innerHTML = parseInt(aux.innerHTML) - 1;
+	if(aux.innerHTML == '0'){
+		eliminarLinea(clase.id);
+	}
+	updatePrice(clase.precio * -1);
+	
+}
+
+function eliminar(){
+	list.innerHTML = "";
+	list.display = "none";
+	total.innerHTML = "0"
+}
+
+function eliminarLinea(clase){
+	let idLi;
+
+	if(typeof clase != 'number'){
+		idLi = productos[clase.target.classList[0] - 1];
+	}else{
+		idLi = productos[clase];
+	}
+	console.log(list);
+	for (const element of list.childNodes) {
+		if(element.className == idLi.id){
+			console.log('aa');
+			updatePrice(idLi.precio * -parseInt(element.childNodes[1].innerHTML));
+			element.remove();
+		}
+	}
+}
+
+function comprar(){
+	if(parseInt(total.innerHTML) == 0){
+		alert('Por favor compre algo');
+	}else{
+		alert('Muchas gracias por su compra');
+	}
+	eliminar();
+}
+
+function updatePrice(extra){
+	total.innerHTML = parseInt(total.innerHTML) + extra;
 }
