@@ -7,7 +7,6 @@ const productos = [
   	{ id: 6, nombre: "Aloe vera", imagen: "img/aloe-vera.jpg", descripcion: "La cualidad por la que más destaca la Aloe Vera son sus propiedades curativas.", precio: 41, stock: 500 },
 ];
 
-let div = document.querySelector('.products');
 let cart = document.querySelector('.showCart');
 let cartDiv = document.querySelector('.cart');
 let list = document.querySelector('.listaProd');
@@ -22,6 +21,9 @@ purchase.addEventListener('click',comprar);
 products(productos);
 
 function products(productos){
+	
+	let div = document.querySelector('.products');
+
 	for (const element of productos) {
 		div.innerHTML += '<div class="product">'
 			+ '<div class="cell">'
@@ -63,6 +65,7 @@ function addToCart(id){
 	}else{
 		if(anhadido.stock > 0){
 			productos[id - 1].stock = productos[id -1].stock - 1;
+
 			list.innerHTML += '<li class="'+ anhadido.id +'">'
 				+ anhadido.nombre 
 				+ ' - €' + anhadido.precio 
@@ -81,7 +84,7 @@ function addToCart(id){
 }
 
 function sum(clase){
-	if(typeof clase != 'object'){
+	if(clase.stock == undefined){
 		clase = productos[clase.target.classList[0] - 1]
 	}
 	if(clase.stock > 0){
@@ -117,12 +120,11 @@ function eliminarLinea(clase){
 	if(typeof clase != 'number'){
 		idLi = productos[clase.target.classList[0] - 1];
 	}else{
-		idLi = productos[clase];
+		idLi = productos[clase - 1];
 	}
-	console.log(list);
 	for (const element of list.childNodes) {
+		console.log(element.className);
 		if(element.className == idLi.id){
-			console.log('aa');
 			updatePrice(idLi.precio * -parseInt(element.childNodes[1].innerHTML));
 			element.remove();
 		}

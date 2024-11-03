@@ -1,0 +1,8 @@
+@import url("./partials/body.css");
+@import url("./partials/footer.css");
+@import url("./partials/header.css");
+
+@font-face {
+    font-family: unformalFont;
+    src: url("/css/Rovers/fonts/LemonTuesday.otf");
+}

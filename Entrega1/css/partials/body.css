@@ -1,0 +1,177 @@
+@media screen and (max-width:1200px){
+    
+    .bottom_services{
+        display: block;
+        padding: 10px 23%;
+        margin-top: 50px;
+
+        img{
+            width: 100%;
+        }
+    }
+}
+@media screen and (min-width:1200px){
+    
+    .bottom_services{
+        display: flex;
+        padding: 10px 23%;
+
+        img{
+            width: 400px;
+        }
+    }
+}
+
+@media screen and (max-width:900px){
+    
+    .services{
+        display: block;
+        padding: 10px 7%;
+
+        h5{
+            font-size: large;
+        }
+    }
+
+    .sub_service{
+        border-bottom: 1px solid rgb(220, 220, 220 , 0.5);
+        padding: 20px 0px;
+    }
+}
+@media screen and (min-width:900px){
+
+    .services{
+        display: flex;
+        padding: 10px 23%;
+    }
+
+    .sub_service{
+        border-left: 1px solid rgb(220, 220, 220 , 0.5);
+        padding: 0px 15px;
+    }
+}
+
+body{
+    margin: 0px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.carrousel{
+    background-image: url("/css/Rovers/imagenes/fondo.jpg");
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);;
+    background-size: cover;
+    background-position: center;
+    height: 670px;
+    color: white;
+}
+
+.carrousel_content{
+    display: grid;
+    margin-left: 23%;
+    padding-top: 10%;
+
+    div i{
+        font-size: 25px;
+        padding-left: 10px;
+    }
+
+    div i:hover{
+        cursor: pointer;
+    }
+}
+
+.button{
+    width: fit-content;
+    background-color: #FF4F4B;
+    border: 2px solid #FF4F4B;
+    color: white;
+    padding: 15px;
+}
+
+.button:hover{
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.aboutUs_button:hover{
+    color: #FF4F4B;
+}
+
+.div_img{  
+    border: 2px solid #FF4F4B;
+    transform: rotate(15deg);
+    margin-right: 50px;
+}
+
+.div_img:hover{
+    transition: 1s;
+    rotate: -15deg;
+}
+
+.bottom_services{
+    margin-bottom: 5%;
+
+    img{
+        transform: rotate(-15deg);
+    }
+}
+
+p{
+    color: gray;
+}
+
+.white{
+    color: white;
+}
+
+.title{
+    text-align: center;
+    font-family: unformalFont;
+}
+
+h2{
+    font-family: unformalFont;
+}
+
+.orange {
+    color: #FF4F4B;
+}
+
+.hr_body{
+    border-top: 1px dashed #FF4F4B;
+    width: 200px;
+}
+
+.icon_sub_service{
+    color: #FF4F4B;
+    border: 1px solid #FF4F4B;
+    padding: 10px;
+}
+
+.services h5{
+    margin: 10px 0px;
+    font-weight: 900;
+}
+
+.read_more{
+    color: #FF4F4B;
+    font-weight: 900;
+}
+
+.read_more:hover{
+    cursor: pointer;
+}
+
+.arrow{
+    margin-left: 90%;
+    margin-bottom: 100px;
+
+    i{
+        font-size: 30px;
+        color: white;
+        background-color: #FF4F4B;
+        padding: 5px 10px;
+        border-radius: 25%;
+    }
+}
