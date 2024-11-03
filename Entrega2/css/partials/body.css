@@ -31,6 +31,15 @@ button:hover{
         margin: 0px auto;
     }
 
+    ul{
+        list-style: none;
+
+        button{
+            background-color: rgb(219, 0, 0);
+            padding: 5px 10px;
+        }
+    }
+
     button{
         padding: 10px;
         margin: 5px;
@@ -38,6 +47,10 @@ button:hover{
 
     .listaProd{
         display: none;
+
+        li{
+            border-bottom: 2px solid;
+        }
     }
 }
 
